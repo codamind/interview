@@ -1,5 +1,6 @@
 package com.resurs.interview.contoller;
 
+import com.resurs.interview.model.api.CreditScoreResponse;
 import com.resurs.interview.model.api.CustomerCreateRequest;
 import com.resurs.interview.model.api.CustomerResponse;
 import com.resurs.interview.service.CustomerService;
@@ -7,12 +8,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,15 +30,25 @@ public class CustomerController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @GetMapping
+    public ResponseEntity<List<CustomerResponse>> getAllCustomer() {
+        List<CustomerResponse> allCustomers = customerService.getAllCustomers();
+        if (allCustomers.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(allCustomers);
+    }
+
     @GetMapping("/{customerId}/creditScore")
-    public ResponseEntity<Integer> getCreditScore(@PathVariable Long customerId) {
+    public ResponseEntity<CreditScoreResponse> getCreditScore(@PathVariable Long customerId) {
         return customerService.getCreditScore(customerId)
-                .map(ResponseEntity::ok)
+                .map(score -> new ResponseEntity<>(new CreditScoreResponse(score), HttpStatus.OK))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping("/{customerId}/loan")
     public ResponseEntity<String> requestLoan(@PathVariable Long customerId) {
+
         boolean approved = customerService.requestLoan(customerId);
         return ResponseEntity.ok(approved ? "Loan approved" : "Loan denied");
     }

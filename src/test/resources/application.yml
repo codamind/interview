@@ -6,15 +6,10 @@ spring:
     name: ThorstenHagaInterview
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/bank
+    url: jdbc:postgresql://localhost:5432/lala
     username: testuser
     password: mypassword
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     generate-ddl: true
-  sql:
-    init:
-      mode: always

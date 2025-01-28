@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "971bbf21-b33d-4f7e-a604-67ad26463be6",
+		"name": "Interview_Resursbank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41524853"
+	},
+	"item": [
+		{
+			"name": "create_customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Thorsten\",\r\n    \"lastName\": \"Haga\",\r\n    \"email\": \"thorsten@haga.me\",\r\n    \"address\": \"Marmorbyn Skogsgläntan\",\r\n    \"postcode\": \"641 95\",\r\n    \"city\": \"Katrineholm\",\r\n    \"socialSecurityNumber\": 197803030234\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/v1/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createTransaction",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\": \"502.00\",\r\n    \"transactionDate\": \"2011-12-03T10:15:31+01:00\",\r\n    \"transactionType\": \"CREDIT\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9090/api/v1/transactions/customer/1/create",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"customer",
+						"1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/customer/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCreditScore",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/customer/1/creditScore",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"customer",
+						"1",
+						"creditScore"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTransactionByCustomer",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9090/api/v1/transactions/customer/1",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"api",
+						"v1",
+						"transactions",
+						"customer",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

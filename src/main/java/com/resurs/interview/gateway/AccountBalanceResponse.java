@@ -1,6 +1,7 @@
 package com.resurs.interview.gateway;
 
 import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,14 +14,4 @@ public class AccountBalanceResponse {
     private double balance;
     private String currency;
     private LocalDateTime lastUpdated;
-
-    @Override
-    public String toString() {
-        return "AccountBalanceResponse{" +
-                "accountId='" + accountId + '\'' +
-                ", balance=" + balance +
-                ", currency='" + currency + '\'' +
-                ", lastUpdated='" + lastUpdated + '\'' +
-                '}';
-    }
 }

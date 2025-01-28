@@ -6,15 +6,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Customer")
+@Table(name = "customer")
 public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id", nullable = false)
     private Long id;
     private String firstName;
     private String lastName;
@@ -22,9 +26,11 @@ public class CustomerEntity {
     private String address;
     private String postcode;
     private String city;
-    @Column(name = "ssn", length = 12, nullable = false, unique = true)
+    @Column(name = "ssn", length = 13, nullable = false, unique = true)
     private String ssn; //socialSecurityNumber
-    private Integer creditScore;
+    private Double creditScore;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<TransactionEntity> transactions;
 
 
     public static CustomerEntity transform(CustomerCreateRequest customer) {
@@ -37,7 +43,9 @@ public class CustomerEntity {
                 customer.getPostcode(),
                 customer.getCity(),
                 customer.getSocialSecurityNumber(),
-                null);
+                0.0,
+                new ArrayList<>() {
+                });
     }
 
 }

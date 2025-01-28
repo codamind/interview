@@ -1,10 +1,11 @@
 package com.resurs.interview.gateway;
 
 import java.util.Random;
+
 import org.springframework.stereotype.Service;
 
 @Service
-public class MockedTaxCheckGateway  implements TaxCheckGateway {
+public class MockedTaxCheckGateway implements TaxCheckGateway {
     private final Random random = new Random();
 
     @Override
