@@ -49,7 +49,7 @@ class CustomerServiceTest {
     void requestLoan_customerNotFound_loanDenied() {
         //given
         Long customerId = 1L;
-        when(customerRepository.findById(customerId)).thenReturn(null);
+        when(customerRepository.findById(customerId)).thenReturn(Optional.empty());
         //when
         boolean result = customerService.requestLoan(customerId);
         //then
